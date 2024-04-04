@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Form Validation</title>
+    <style>
+        body {
+            padding: 10px 50px;
+        }
+
+        .design input {
+            width: 45%;
+            padding: 12px 20px;
+            border: 1px solid #010600;
+            margin: 14px;
+            border-radius: 10px;
+        }
+
+        input[type="submit"] {
+            width: 10%;
+            height: 50px;
+            padding: 12px 20px;
+            border: 1px solid #010600;
+            margin: 14px;
+            border-radius: 10px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Welcome To Shivani Oils</h1>
+    <form action="/myaction.php" name="myform" onsubmit="return validateform()" method="post">
+        <div class="design" id="fname">
+            First Name: <input type="fname" name="fname" required> <b><span class="formerror"></span></b>
+        </div>
+
+        <div class="design" id="mname">
+            Middle Name: <input type="mname" name="mname" required> <b><span class="formerror"></span></b>
+        </div>
+
+        <div class="design" id="lname">
+            Last Name: <input type="lname" name="lname" required> <b><span class="formerror"></span></b>
+        </div>
+
+        <div class="design" id="email">
+            E-mail: <input type="email" name="email"> <b><span class="formerror"></span></b>
+        </div>
+
+        <div class="design" id="Mobile">
+            Mobile: <input type="mobile" name="mobile"> <b><span class="formerror"></span></b>
+        </div>
+
+        <div class="design" id="Password">
+            Password: <input type="password" name="pass" required> <b><span class="formerror"></span></b>
+        </div>
+
+        <div class="design" id="cpass">
+            Confirm Password: <input type="password" name="cpass" required> <b><span class="formerror"></span></b>
+        </div>
+
+        <input class="but" type="submit" value="Submit">
+    </form>
+</body>
+<script>
+
+    function clearerrors() {
+        errors = document.getElementsByClassName('formerror');
+        for (let item of errors) {
+            item.innerHTML = "";
+        }
+    }
+    function seterror(id, error) {
+        //sets error inside tag of id
+        element = document.getElementById(id);
+        element.getElementsByClassName('formerror')[0].innerText = error;
+
+    }
+    function validateform() {
+        var retvalue = true;
+        clearerrors();
+        var name = document.forms["myform"]["fname"].value;
+        if (name.length < 5) {
+            seterror("fname", "*Length of name is too short");
+            retvalue = false;
+        }
+
+        var name = document.forms["myform"]["mname"].value;
+        if (name.length < 5) {
+            seterror("mname", "*Length of name is too short");
+            retvalue = false;
+        }
+
+        var name = document.forms["myform"]["lname"].value;
+        if (name.length < 5) {
+            seterror("lname", "*Length of name is too short");
+            retvalue = false;
+        }
+        var Mobile = document.forms["myform"]["mobile"].value;
+        if (Mobile.length != 10) {
+            seterror("Mobile", "*Length of mobile number should be 10");
+            retvalue = false;
+        }
+
+        var Password = document.forms["myform"]["pass"].value;
+        if (Password.length < 8) {
+            seterror("Password", "*Length of password should be more than 8");
+            retvalue = false;
+        }
+
+        var cpass = document.forms["myform"]["cpass"].value;
+        if (cpass != Password) {
+            seterror("cpass", "Password not matched");
+            retvalue = false;
+        }
+
+        return retvalue;
+    }
+
+</script>
+
+</html>
